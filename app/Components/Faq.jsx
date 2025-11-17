@@ -1,33 +1,89 @@
 "use client";
 import React, { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, ThumbsUp, ThumbsDown } from 'lucide-react';
 
 // --- Reusable FAQ Item Component (Accordion) ---
 const FAQItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [feedback, setFeedback] = useState(null);
+
+  const handleFeedback = (value) => {
+    setFeedback(value);
+  };
 
   return (
-    <div className="border border-green-200 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+    <div className={`border rounded-lg shadow-sm overflow-hidden transition-all duration-300 mb-4 ${
+      isOpen ? 'border-green-600 bg-green-700' : 'border-gray-200 bg-white hover:shadow-md'
+    }`}>
       <button
-        className="flex justify-between items-center w-full p-5 text-left bg-white focus:outline-none"
+        className={`flex justify-between items-center w-full p-6 text-left focus:outline-none transition-colors duration-300 ${
+          isOpen ? 'bg-green-700' : 'bg-white'
+        }`}
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
       >
-        <span className="text-lg font-medium text-gray-800">{question}</span>
-        <div className={`p-1 rounded-full text-white transition-colors duration-300 ${isOpen ? 'bg-red-500' : 'bg-green-600'}`}>
+        <span className={`text-lg font-semibold transition-colors duration-300 ${
+          isOpen ? 'text-white' : 'text-gray-900'
+        }`}>
+          {question}
+        </span>
+        <div className={`p-1 rounded-full transition-colors duration-300 ${
+          isOpen ? 'bg-white text-green-700' : 'bg-green-600 text-white'
+        }`}>
           {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
         </div>
       </button>
 
       <div
-        className={`grid transition-all duration-500 ease-in-out ${
-          isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        className={`transition-all duration-500 ease-in-out ${
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="overflow-hidden">
-          <p className="p-5 pt-0 text-gray-600 leading-relaxed">
+        <div className={`p-6 pt-0 transition-colors duration-300 ${
+          isOpen ? 'bg-green-700' : ''
+        }`}>
+          <p className={`leading-relaxed mb-4 transition-colors duration-300 ${
+            isOpen ? 'text-white' : 'text-gray-600'
+          }`}>
             {answer}
           </p>
+          
+          {/* Feedback Section */}
+          <div className={`flex items-center justify-between pt-4 border-t transition-colors duration-300 ${
+            isOpen ? 'border-green-600' : 'border-gray-100'
+          }`}>
+            <span className={`text-sm transition-colors duration-300 ${
+              isOpen ? 'text-green-100' : 'text-gray-500'
+            }`}>
+              Was This Content Helpful ?
+            </span>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => handleFeedback('yes')}
+                className={`p-2 rounded-full transition-colors ${
+                  feedback === 'yes' 
+                    ? 'bg-green-600 text-white' 
+                    : isOpen 
+                    ? 'text-green-200 hover:bg-green-600 hover:text-white'
+                    : 'text-gray-400 hover:bg-gray-100 hover:text-gray-600'
+                }`}
+              >
+                <ThumbsUp className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => handleFeedback('no')}
+                className={`p-2 rounded-full transition-colors ${
+                  feedback === 'no' 
+                    ? 'bg-green-600 text-white' 
+                    : isOpen 
+                    ? 'text-green-200 hover:bg-green-600 hover:text-white'
+                    : 'text-gray-400 hover:bg-gray-100 hover:text-gray-600'
+                }`}
+              >
+                <ThumbsDown className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,38 +92,45 @@ const FAQItem = ({ question, answer }) => {
 
 // --- Main FAQ Section Component ---
 const FAQSection = () => {
-  // Static data for the FAQ content
+  // Updated FAQ data according to the image
   const faqs = [
     {
       question: 'What Is Habisolo?',
-      answer: 'Habisolo is a human-centered housing platform that connects elderly homeowners with international students and young professionals seeking affordable, meaningful accommodation in shared homes.',
+      answer: 'Habisolo Is A Trusted Housing Platform That Connects Seniors With Space Rooms To Students And Young Professionals Seeking Affordable Housing.',
     },
     {
       question: 'Is It Safe?',
-      answer: 'Safety is our top priority. All users (both hosts and guests) go through a thorough ID verification process. We also offer secure payment systems and insurance options for peace of mind.',
+      answer: 'All Users Are Verified, Payments Are Secure, And Reviews Are Transparent.',
     },
     {
       question: 'How Much Does It Cost?',
-      answer: 'The cost varies based on location, room size, and duration. For students/professionals, we offer competitive, all-inclusive pricing. For hosts, listing a space is free, and we take a small, transparent service fee upon a successful match.',
+      answer: 'Guests Pay Rent + A Small Service Fee. Hosts Earn Income After A Service Commission.',
     },
     {
       question: "What If There's Damage?",
-      answer: "We commit to transparent insurance options and a clear protocol for handling damages. This includes a security deposit and a mediation service to ensure fair resolution for both the host and the guest.",
+      answer: 'Guests Can Choose Refundable Deposits Or Optional Insurance Protection.',
     },
     {
       question: 'Where Is Habisolo Available?',
-      answer: 'Currently, habisolo is primarily focused on connecting communities across major cities in Spain. We are rapidly expanding and plan to launch in other European countries soon!',
+      answer: 'We Are Rolling Out In Spain\'s Main Student Hubs: Malaga, Granada, Valencia, Madrid, And Barcelona.',
     },
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
-          FREQUENTLY ASKED QUESTIONS (FAQ)
-        </h2>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            FREQUENTLY ASKED QUESTIONS (FAQ)
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Find answers to the most common questions about our platform
+          </p>
+        </div>
         
-        <div className="space-y-4">
+        {/* FAQ Items */}
+        <div className="space-y-2">
           {faqs.map((faq, index) => (
             <FAQItem 
               key={index}
@@ -75,6 +138,16 @@ const FAQSection = () => {
               answer={faq.answer}
             />
           ))}
+        </div>
+
+        {/* Additional Help Section */}
+        <div className="text-center mt-12 pt-8 border-t border-gray-200">
+          <p className="text-gray-600 mb-4">
+            Still have questions? We're here to help!
+          </p>
+          <button className="bg-green-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors duration-300">
+            Contact Support
+          </button>
         </div>
       </div>
     </section>

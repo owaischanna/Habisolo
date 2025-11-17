@@ -56,7 +56,7 @@ const handleNotificationClick = () => {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
           <input
             type="text"
-            placeholder="Search properties, cities, or amenities..."
+            placeholder="Search Apartments, cities, or amenities..."
             className="w-full pl-10 pr-4 py-2 rounded-full text-sm bg-gray-100 focus:ring-green-500 focus:outline-none"
           />
         </div>
