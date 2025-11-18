@@ -16,21 +16,23 @@ const cityOptions = [
   "Sevilla",
   "Malaga",
   "Granada",
+  "Valencia",
+  "Barcelona",
   "Madrid", // Note: Madrid is duplicated, you may want to remove one
 ];
 const propertyTypeOptions = [
   "Choose Accomodataion Type",
   "Apartment",
   "House",
-  "Condo",
-  "Townhouse",
+  "Cozy Room",
+  "Modern Studio Room",
 ];
 const priceRangeOptions = [
   "Choose Price Range",
-  "1000 - €2000",
-  "€2000 - €3000",
-  "€3000 - €5000",
-  "Above €5000",
+  "€200 - €500",
+  "€500 - €1000",
+  "€1000 - €2000",
+  "€2000 - €2500",
 ];
 
 
@@ -226,13 +228,17 @@ const NavBar = ({ onOpenAuth }) => {
 // --- Search Filter Component ---
 const SearchFilter = () => (
   // Removed mr-8 on mobile, kept it for large screens (lg:mr-8)
-  <div className="bg-white p-4 sm:p-6 rounded-xl shadow-2xl w-full lg:mr-8">
+  <div className="bg-white-100 p-4 sm:p-6 rounded-xl shadow-2xl w-full lg:mr-8">
     
     {/* RENT LIST buttons on same line */}
-    <div className="flex space-x-6 mb-4 sm:mb-6">
-      <button className="text-gray-900 font-bold text-lg">RENT</button>
-      <button className="text-gray-500 font-bold text-lg">LIST</button>
-    </div>
+<div className="flex space-x-6 mb-4 sm:mb-6">
+  <button className="bg-white text-gray-900 font-bold text-lg px-4 py-1 rounded-lg shadow-sm">
+    RENT
+  </button>
+  <button className="bg-white text-gray-500 font-bold text-lg px-4 py-1 rounded-lg shadow-sm">
+    LIST
+  </button>
+</div>
 
     {/* Four columns layout wraps on smaller screens */}
     <div className="flex flex-col sm:flex-row items-end gap-3 sm:gap-4">
@@ -241,7 +247,7 @@ const SearchFilter = () => (
       <div className="w-full sm:flex-1">
         <label className="text-sm font-medium text-gray-700 block mb-1 sm:mb-2">Location</label>
         <div className="border border-gray-300 rounded-lg p-2 sm:p-3">
-          <select className="w-full bg-white text-gray-600 outline-none text-sm">
+          <select className="w-full  text-gray-600 outline-none text-sm">
             {cityOptions.map((option, index) => (
               <option key={option + index} value={option} disabled={index === 0} hidden={index === 0}>
                 {option}
@@ -255,7 +261,7 @@ const SearchFilter = () => (
       <div className="w-full sm:flex-1">
         <label className="text-sm font-medium text-gray-700 block mb-1 sm:mb-2">Accomodation Type</label>
         <div className="border border-gray-300 rounded-lg p-2 sm:p-3">
-          <select className="w-full bg-white text-gray-600 outline-none text-sm">
+          <select className="w-full  text-gray-600 outline-none text-sm">
             {propertyTypeOptions.map((option, index) => (
               <option key={option} value={option} disabled={index === 0} hidden={index === 0}>
                 {option}
@@ -269,7 +275,7 @@ const SearchFilter = () => (
       <div className="w-full sm:flex-1">
         <label className="text-sm font-medium text-gray-700 block mb-1 sm:mb-2">Price Range</label>
         <div className="border border-gray-300 rounded-lg p-2 sm:p-3">
-          <select className="w-full bg-white text-gray-600 outline-none text-sm">
+          <select className="w-full  text-gray-600 outline-none text-sm">
             {priceRangeOptions.map((option, index) => (
               <option key={option} value={option} disabled={index === 0} hidden={index === 0}>
                 {option}
@@ -347,7 +353,7 @@ const HeroSection = () => {
             Find a perfect home you love..!
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-gray-600 max-w-lg mx-auto lg:mx-0">
-            One Roof, Many Generations, Endless Connections...
+            One roof, many Generations, Endless Connections...
           </p>
           {/* Search Filter Component Placement */}
           <div className="mt-10 sm:mt-16 w-full flex justify-center lg:justify-start">

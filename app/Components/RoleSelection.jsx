@@ -66,7 +66,7 @@ const RoleSelection = ({ onClose, onRoleSelect }) => {
               </div>
 
               <div className="text-center mb-4">
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 ">
                   Guest
                 </h3>
                 <p className="text-gray-600 text-sm">
@@ -111,7 +111,7 @@ const RoleSelection = ({ onClose, onRoleSelect }) => {
                 onClick={handleContinue}
                 className={`w-full py-2 sm:py-3 rounded-lg font-semibold text-sm transition ${selectedRole === "renter"
                     ? "bg-orange-500 text-white hover:bg-orange-600"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    : "bg-orange-500 text-white hover:bg-orange-600"
                   }`}
               >
                 Continue as Guest
@@ -178,7 +178,7 @@ const RoleSelection = ({ onClose, onRoleSelect }) => {
                 onClick={handleContinue}
                 className={`w-full py-2 sm:py-3 rounded-lg font-semibold text-sm transition ${selectedRole === "host"
                     ? "bg-green-600 text-white hover:bg-green-700"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    : "bg-green-600 text-white hover:bg-green-700"
                   }`}
               >
                 Continue as Host

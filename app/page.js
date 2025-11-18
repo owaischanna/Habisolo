@@ -6,6 +6,7 @@ import FAQSection from "./Components/Faq";
 import Footer from "./Components/Footer";
 
 
+
 export default function Home() {
   return (
     <div className="w-screen max-w-full overflow-x-hidden relative box-border">

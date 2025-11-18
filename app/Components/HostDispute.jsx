@@ -26,7 +26,7 @@ const initialDisputes = [
         title: "You filed against John Davis",
         property: "Ocean View Apartment",
         filedDate: "1 day ago",
-        category: "Apartment Damage",
+        category: "Apartment/Room Damage",
         status: "active",
         type: "filed-by",
         amount: 320,
@@ -420,7 +420,7 @@ const FileDisputeForm = ({ onBack, onSubmit }) => {
     const damageCategories = [
         {
             value: 'damage',
-            label: 'Apartment Damage',
+            label: 'Apartment/Room Damage',
             description: 'Physical damage to apartment, furniture, or amenities caused by guest'
         },
         {

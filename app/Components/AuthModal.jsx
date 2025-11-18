@@ -17,12 +17,12 @@ const AuthModal = ({ isOpen, onClose }) => {
     >
       {/* RESPONSIVE FIXES: 
          1. max-w-[95%] -> Fits mobile screens.
-         2. md:max-w-lg -> Wider on desktop.
+         2. md:max-w-2xl -> Made wider for desktop (changed from md:max-w-lg)
          3. max-h-[90vh] -> Prevents modal from being taller than screen.
          4. flex flex-col -> Enables sticky footers inside children to work.
       */}
       <div
-        className="bg-white rounded-xl w-full max-w-[95%] sm:max-w-md md:max-w-lg shadow-xl relative transform animate-in zoom-in duration-300 overflow-hidden flex flex-col max-h-[90vh]"
+        className="bg-white rounded-xl w-full max-w-[95%] sm:max-w-md md:max-w-2xl shadow-xl relative transform animate-in zoom-in duration-300 overflow-hidden flex flex-col max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Background Decorative Elements */}

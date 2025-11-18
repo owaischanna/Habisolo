@@ -108,7 +108,7 @@ const Step1BasicInfo = ({ formData, handleChange }) => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Location *</label>
                 <input type="text" name="address" value={address} onChange={(e) => handleChange(e.target.name, e.target.value)} placeholder="Address" className="w-full border border-gray-300 rounded-lg p-2.5 text-sm mb-2" />
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <input type="text" name="state" placeholder="State" onChange={(e) => handleChange(e.target.name, e.target.value)} className="sm:col-span-1 border border-gray-300 rounded-lg p-2.5 text-sm" />
+                    <input type="text" name="state" placeholder="Province" onChange={(e) => handleChange(e.target.name, e.target.value)} className="sm:col-span-1 border border-gray-300 rounded-lg p-2.5 text-sm" />
                     <input type="text" name="town" placeholder="Town" onChange={(e) => handleChange(e.target.name, e.target.value)} className="sm:col-span-2 border border-gray-300 rounded-lg p-2.5 text-sm" />
                     <input type="text" name="zip" placeholder="Zip Code" onChange={(e) => handleChange(e.target.name, e.target.value)} className="sm:col-span-1 border border-gray-300 rounded-lg p-2.5 text-sm" />
                 </div>
@@ -122,8 +122,8 @@ const Step1BasicInfo = ({ formData, handleChange }) => {
                 </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div><label className="block text-sm font-medium text-gray-700 mb-2">Room Size (sq ft)</label><input type="number" name="roomSize" value={roomSize} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm" /></div>
-                <div><label className="block text-sm font-medium text-gray-700 mb-2">Max Occupancy</label><select name="maxOccupancy" value={maxOccupancy} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm"><option>1 person</option><option>2 persons</option></select></div>
+                <div><label className="block text-sm font-medium text-gray-700 mb-2">Room Size (sq meter)</label><input type="number" name="roomSize" value={roomSize} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm" /></div>
+                <div><label className="block text-sm font-medium text-gray-700 mb-2">Max Occupancy</label><select name="maxOccupancy" value={maxOccupancy} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm"><option>1 person</option><option>2 persons</option><option>3 persons</option><option>4 persons</option><option>5 persons</option></select></div>
                 <div><label className="block text-sm font-medium text-gray-700 mb-2">Bathroom Type</label><div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0"><ToggleButton label="Private" isActive={bathroomType === 'Private'} onClick={() => handleChange('bathroomType', 'Private')} /><ToggleButton label="Shared" isActive={bathroomType === 'Shared'} onClick={() => handleChange('bathroomType', 'Shared')} /></div></div>
             </div>
             <div>
@@ -183,7 +183,7 @@ const Step2AddPhotos = ({ formData, handleChange }) => {
             <div className="bg-blue-50 border border-blue-200 text-blue-800 p-4 rounded-lg space-y-2">
                 <div className="flex items-center space-x-2 font-semibold"><ImageIcon className="w-5 h-5 text-blue-600" /><span>Photo Guidelines</span></div>
                 <ul className="text-sm list-disc pl-5 space-y-1 text-gray-700">
-                    <li>Upload at least 5 high-quality photos (minimum 1920x1080px)</li>
+                    <li>Upload at least 4 high-quality photos (minimum 1920x1080px)</li>
                     <li>Include photos of the room, common areas, and exterior</li>
                     <li>Ensure good lighting and clean spaces for best results</li>
                     <li>The first photo will be your cover image</li>
@@ -235,7 +235,7 @@ const Step2AddPhotos = ({ formData, handleChange }) => {
             <div className="border-t border-gray-200 pt-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Additional Photos</h3>
                 <p className="text-sm text-gray-500 mb-4">Add more photos to showcase different areas and angles</p>
-                <p className="text-sm font-medium text-right text-gray-600 mb-4">{totalUploaded} of 20 photos uploaded</p>
+                <p className="text-sm font-medium text-right text-gray-600 mb-4">{totalUploaded} of 4 photos uploaded</p>
 
                 <h4 className="text-md font-semibold text-gray-700 mb-3">Room Photos ({roomPhotosCount})</h4>
                 <div className="flex flex-wrap gap-4">
@@ -309,7 +309,7 @@ const Step3PricingAndAvailability = ({ formData, handleChange }) => {
                         <button type="button" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm font-medium">Add</button>
                     </div>
 
-                    <h4 className="text-md font-medium text-gray-800 mb-3">Additional Fees (Optional)</h4>
+                    <h4 className="text-md font-medium text-gray-800 mb-3">Additional Fees (Compulsory)</h4>
                     <div className="space-y-3">
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center bg-gray-50 p-3 rounded-lg border border-gray-200 gap-2">
                             <span className="text-sm font-medium text-gray-700">Security Deposit</span>
@@ -339,11 +339,11 @@ const Step3PricingAndAvailability = ({ formData, handleChange }) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Minimum Stay Duration</label>
-                            <select name="minDuration" value={minDuration} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm"><option>3 months</option><option>6 months</option></select>
+                            <select name="minDuration" value={minDuration} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm"><option>1 months</option></select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Maximum Stay Duration</label>
-                            <select name="maxDuration" value={maxDuration} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm"><option>12 months</option><option>Indefinite</option></select>
+                            <select name="maxDuration" value={maxDuration} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm"><option>12 months</option> 3 months <option>4 months</option> <option>5 months</option> <option>6 months</option> <option>7 months</option><option>7 months</option></select>
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
@@ -355,13 +355,55 @@ const Step3PricingAndAvailability = ({ formData, handleChange }) => {
                 </div>
             </div>
 
-            <div className="lg:col-span-1">
-                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 lg:sticky lg:top-0">
-                    <h4 className="font-bold text-gray-800 mb-4">Availability *</h4>
-                    <label htmlFor="moveInDate" className="block text-sm font-medium text-gray-700 mb-2">Available Move-in Date</label>
-                    <input type="date" id="moveInDate" name="moveInDate" value={formData.moveInDate} onChange={(e) => handleChange(e.target.name, e.target.value)} className="w-full border border-gray-300 rounded-lg p-2.5 text-sm" />
-                </div>
+          <div className="lg:col-span-1">
+  <div className="lg:col-span-1">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 lg:sticky lg:top-0">
+        <h4 className="font-bold text-gray-800 mb-4">Availability *</h4>
+        
+        <div className="space-y-4">
+            <div>
+                <label htmlFor="checkInDate" className="block text-sm font-medium text-gray-700 mb-2">
+                    Check-in Date
+                </label>
+                <input 
+                    type="date" 
+                    id="checkInDate" 
+                    name="checkInDate" 
+                    value={formData.checkInDate} 
+                    onChange={(e) => {
+                        handleChange(e.target.name, e.target.value);
+                        
+                        // If check-out date is before the new check-in date, reset it
+                        if (formData.checkOutDate && e.target.value > formData.checkOutDate) {
+                            handleChange('checkOutDate', '');
+                        }
+                    }} 
+                    min={new Date().toISOString().split('T')[0]} // Can't select past dates
+                    className="w-full border border-gray-300 rounded-lg p-2.5 text-sm" 
+                />
             </div>
+            
+            <div>
+                <label htmlFor="checkOutDate" className="block text-sm font-medium text-gray-700 mb-2">
+                    Check-out Date
+                </label>
+                <input 
+                    type="date" 
+                    id="checkOutDate" 
+                    name="checkOutDate" 
+                    value={formData.checkOutDate} 
+                    onChange={(e) => handleChange(e.target.name, e.target.value)} 
+                    min={formData.checkInDate || new Date().toISOString().split('T')[0]} // Can't be before check-in date
+                    className="w-full border border-gray-300 rounded-lg p-2.5 text-sm" 
+                />
+                {formData.checkInDate && formData.checkOutDate && formData.checkOutDate <= formData.checkInDate && (
+                    <p className="text-red-500 text-xs mt-1">Check-out date must be after check-in date</p>
+                )}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
         </div>
     );
 };
@@ -380,7 +422,7 @@ const Step4ReviewAndPublish = ({ formData }) => {
     ].filter(Boolean);
 
     const totalPhotos = allPhotos.length;
-    const isReady = totalPhotos >= 5 && monthlyRent && listingTitle;
+    const isReady = totalPhotos >= 4 && monthlyRent && listingTitle;
 
     const amenityMapping = [
         { label: 'WiFi', icon: Rss, included: utilities.includes('Internet/WiFi') },
@@ -458,7 +500,7 @@ const Step4ReviewAndPublish = ({ formData }) => {
 
                         <li className="font-semibold text-gray-900 pt-3">Photos</li>
                         <li className={`flex items-center space-x-2 ${photos.cover ? 'text-green-600' : 'text-gray-500'}`}><CheckCircle className="w-4 h-4" /> <span>Cover photo uploaded</span></li>
-                        <li className={`flex items-center space-x-2 ${totalPhotos >= 5 ? 'text-green-600' : 'text-gray-500'}`}><CheckCircle className="w-4 h-4" /> <span>At least 5 photos added</span></li>
+                        <li className={`flex items-center space-x-2 ${totalPhotos >= 4 ? 'text-green-600' : 'text-gray-500'}`}><CheckCircle className="w-4 h-4" /> <span>At least 4 photos added</span></li>
 
                         <li className="font-semibold text-gray-900 pt-3">Pricing & Availability</li>
                         <li className={`flex items-center space-x-2 ${monthlyRent ? 'text-green-600' : 'text-gray-500'}`}><CheckCircle className="w-4 h-4" /> <span>Monthly rent set</span></li>

@@ -3,12 +3,91 @@
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { useState } from "react";
-import RoleSelection from "./RoleSelection";
 import toast from 'react-hot-toast';
-import { Mail, Lock, User, MapPin, Phone, Calendar, Users, Briefcase } from "lucide-react";
+import { Mail, Lock, User, MapPin, Phone, Calendar, Users, Briefcase, Eye, EyeOff, Check, X } from "lucide-react";
 
+// --- Inlined RoleSelection Component ---
+const RoleSelection = ({ onClose, onRoleSelect }) => {
+  const [selectedRole, setSelectedRole] = useState(null);
+
+  const roles = [
+    {
+      id: 'Renter',
+      title: 'Tenant',
+      description: 'I am looking for a place to rent.',
+      icon: <User className="w-8 h-8 text-green-600" />,
+    },
+    {
+      id: 'Landlord',
+      title: 'Landlord',
+      description: 'I want to list my property.',
+      icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+    }
+  ];
+
+  const handleContinue = () => {
+    if (selectedRole) {
+      onRoleSelect(selectedRole);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-bold text-gray-900">Select Account Type</h3>
+            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <X className="w-5 h-5 text-gray-500" />
+            </button>
+          </div>
+          
+          <div className="space-y-4 mb-8">
+            {roles.map((role) => (
+              <div 
+                key={role.id}
+                onClick={() => setSelectedRole(role.id)}
+                className={`relative p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 flex items-center gap-4 ${
+                  selectedRole === role.id 
+                    ? 'border-green-500 bg-green-50' 
+                    : 'border-gray-200 hover:border-green-200 hover:bg-gray-50'
+                }`}
+              >
+                <div className={`p-3 rounded-full ${selectedRole === role.id ? 'bg-white' : 'bg-gray-100'}`}>
+                  {role.icon}
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-gray-900">{role.title}</h4>
+                  <p className="text-sm text-gray-500">{role.description}</p>
+                </div>
+                {selectedRole === role.id && (
+                  <div className="absolute top-4 right-4">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <Check className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={handleContinue}
+            disabled={!selectedRole}
+            className="w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- Main SignUpForm Component ---
 const SignUpForm = ({ switchToSignIn }) => {
   const [step, setStep] = useState("signup");
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -133,11 +212,7 @@ const SignUpForm = ({ switchToSignIn }) => {
             </p>
           </div>
 
-          {/* Scrollable Content: 
-              - flex-1: Fills available space
-              - min-h-0: Essential for nested flex scrolling
-              - pb-24: Ensures content isn't hidden behind the footer
-          */}
+          {/* Scrollable Content */}
           <div className="flex-1 overflow-y-auto min-h-0 w-full overscroll-contain px-3 sm:px-4 lg:px-6 pt-3 sm:pt-4 pb-24">
             <h4 className="text-sm sm:text-md font-semibold text-gray-800 border-b pb-2">Basic Information</h4>
 
@@ -308,12 +383,7 @@ const SignUpForm = ({ switchToSignIn }) => {
             </div>
           </div>
 
-          {/* FIXED FOOTER:
-            - shrink-0: Ensures it is never squashed by flex content.
-            - z-50: Ensures it sits on top of everything.
-            - bg-white: Opaque background so you don't see scrolling text behind it.
-            - It is NOT 'sticky', it is a flex child at the bottom, meaning it will always be visible.
-          */}
+          {/* FIXED FOOTER */}
           <div className="shrink-0 z-50 bg-white p-3 sm:p-4 border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] w-full">
             <button
               onClick={handlePersonalInfoContinue}
@@ -361,39 +431,31 @@ const SignUpForm = ({ switchToSignIn }) => {
               </div>
             </div>
 
-            {/* Password */}
-            <div className="relative">
+            {/* Password - With Toggle */}
+            <div className="relative mt-3">
               <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3 sm:w-4 sm:h-4" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Create your password"
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
                   className="w-full border border-gray-300 rounded-lg px-8 sm:px-10 py-2 sm:py-3 text-xs sm:text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-200 hover:border-gray-400"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" />
+                  ) : (
+                    <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
+                  )}
+                </button>
               </div>
-            </div>
-
-            {/* OR Divider */}
-            <div className="flex items-center my-3 sm:my-4">
-              <hr className="flex-grow border-gray-300" />
-              <span className="px-2 sm:px-3 text-gray-500 text-xs sm:text-sm font-medium">or continue with</span>
-              <hr className="flex-grow border-gray-300" />
-            </div>
-
-            {/* Social Buttons */}
-            <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3">
-              <button className="w-full border border-gray-300 rounded-lg py-2 sm:py-3 text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition-all duration-200 hover:shadow-md hover:border-gray-400 active:scale-95">
-                <FcGoogle className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="font-medium">Google</span>
-              </button>
-              <button className="w-full border border-gray-300 rounded-lg py-2 sm:py-3 text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition-all duration-200 hover:shadow-md hover:border-gray-400 active:scale-95">
-                <FaApple className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" />
-                <span className="font-medium">Apple</span>
-              </button>
             </div>
 
             {/* Sign In Link */}

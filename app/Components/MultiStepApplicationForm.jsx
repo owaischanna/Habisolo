@@ -316,49 +316,71 @@ const Step1PersonalInfo = ({ applicationData, handleChange }) => (
             </div>
         </div>
 
-        <div className="border-t pt-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Lease Preferences</h3>
+<div className="border-t pt-4">
+    <h3 className="text-lg font-semibold text-gray-800 mb-4">Lease Preferences</h3>
 
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <label className="text-sm font-medium text-gray-700">Preferred Move-in Date *</label>
-                    <input
-                        type="date"
-                        name="preferredMoveIn"
-                        value={applicationData.preferredMoveIn}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mt-1"
-                    />
-                </div>
-                <div>
-                    <label className="text-sm font-medium text-gray-700">Preferred Lease Length *</label>
-                    <div className="flex space-x-2 mt-1">
-                        {['6 Months', '12 Months', 'Flexible'].map(term => (
-                            <button
-                                key={term}
-                                type="button"
-                                onClick={() => handleChange({ target: { name: 'leaseLength', value: term } })}
-                                className={`px-3 py-1 text-sm rounded-full transition ${applicationData.leaseLength === term ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                    }`}
-                            >
-                                {term}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="mt-4">
-                <label className="text-sm font-medium text-gray-700">Additional Information</label>
-                <textarea
-                    name="additionalInfo"
-                    value={applicationData.additionalInfo}
-                    onChange={handleChange}
-                    rows="4"
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mt-1"
-                />
-            </div>
+    <div className="grid grid-cols-2 gap-4">
+        <div>
+            <label className="text-sm font-medium text-gray-700">Check-in Date *</label>
+            <input
+                type="date"
+                name="checkInDate"
+                value={applicationData.checkInDate}
+                onChange={(e) => {
+                    handleChange(e);
+                    // If check-out date is before the new check-in date, clear it
+                    if (applicationData.checkOutDate && e.target.value > applicationData.checkOutDate) {
+                        handleChange({ target: { name: 'checkOutDate', value: '' } });
+                    }
+                }}
+                min={new Date().toISOString().split('T')[0]} // Can't select past dates
+                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mt-1"
+            />
         </div>
+        <div>
+            <label className="text-sm font-medium text-gray-700">Check-out Date *</label>
+            <input
+                type="date"
+                name="checkOutDate"
+                value={applicationData.checkOutDate}
+                onChange={handleChange}
+                min={applicationData.checkInDate || new Date().toISOString().split('T')[0]} // Can't be before check-in date
+                className="w-full p-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mt-1"
+            />
+            {applicationData.checkInDate && applicationData.checkOutDate && applicationData.checkOutDate <= applicationData.checkInDate && (
+                <p className="text-red-500 text-xs mt-1">Check-out date must be after check-in date</p>
+            )}
+        </div>
+    </div>
+
+    <div className="mt-4">
+        <label className="text-sm font-medium text-gray-700">Preferred Lease Length *</label>
+        <div className="flex space-x-2 mt-1">
+            {['6 Months', '12 Months', 'Flexible'].map(term => (
+                <button
+                    key={term}
+                    type="button"
+                    onClick={() => handleChange({ target: { name: 'leaseLength', value: term } })}
+                    className={`px-3 py-1 text-sm rounded-full transition ${applicationData.leaseLength === term ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                >
+                    {term}
+                </button>
+            ))}
+        </div>
+    </div>
+
+    <div className="mt-4">
+        <label className="text-sm font-medium text-gray-700">Additional Information</label>
+        <textarea
+            name="additionalInfo"
+            value={applicationData.additionalInfo}
+            onChange={handleChange}
+            rows="4"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-green-500 focus:border-green-500 mt-1"
+        />
+    </div>
+</div>
     </div>
 );
 
@@ -395,6 +417,13 @@ const Step2Documents = ({ applicationData, handleFileUpload }) => (
                 acceptedFiles={['jpg', 'jpeg', 'png', 'pdf']}
                 onFileUpload={(file) => handleFileUpload('financial', file)}
                 uploadedFiles={applicationData.uploadedDocuments.filter(doc => doc.type === 'financial')}
+            />
+               <FileUpload
+                title="Police Character Certificate"
+                required={true}
+                acceptedFiles={['jpg', 'jpeg', 'png', 'pdf']}
+                onFileUpload={(file) => handleFileUpload('police chracter', file)}
+                uploadedFiles={applicationData.uploadedDocuments.filter(doc => doc.type === 'police character')}
             />
 
             <FileUpload

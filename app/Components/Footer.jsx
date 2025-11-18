@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Send, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Send, ArrowRight, X } from 'lucide-react';
 
 // --- Subcomponent: Call to Action Banner (Dark Green Section) ---
 const CallToAction = () => (
@@ -40,7 +40,7 @@ const CallToAction = () => (
 
       {/* Button */}
       <div className="mt-6 lg:mt-0 flex-shrink-0 z-10">
-        <Link href="/get-started">
+        <Link href="#get-started">
           <button className="bg-white text-green-700 py-3 px-6 rounded-lg font-bold shadow-xl hover:bg-gray-100 transition duration-300 flex items-center space-x-2">
             <span>Get Started</span>
             <ArrowRight className="w-5 h-5" />
@@ -49,6 +49,8 @@ const CallToAction = () => (
       </div>
     </div>
   </div>
+
+  
 );
 
 // --- Main Footer Content ---
@@ -94,20 +96,17 @@ const MainFooter = () => {
                 </div>
                 
                 {/* Column 2: Quick Links */}
-                <div>
+                {/* <div>
                     <h4 className="font-semibold text-gray-800 mb-4">Quick Links</h4>
                     <nav className={`text-sm ${textColor} space-y-3`}>
                         <Link href="/" className={`block hover:${linkHoverColor} transition`}>Home</Link>
                         <Link href="/about" className={`block hover:${linkHoverColor} transition`}>About</Link>
-                        <Link href="/listings" className={`block hover:${linkHoverColor} transition`}>Listings</Link>
-                        <Link href="/services" className={`block hover:${linkHoverColor} transition`}>Services</Link>
-                        <Link href="/blogs" className={`block hover:${linkHoverColor} transition`}>Blogs</Link>
-                        <Link href="/testimonials" className={`block hover:${linkHoverColor} transition`}>Testimonials</Link>
+                       
                     </nav>
-                </div>
+                </div> */}
                 
                 {/* Column 3: Discovery (Locations) */}
-                <div>
+                {/* <div>
                     <h4 className="font-semibold text-gray-800 mb-4">Discovery</h4>
                     <nav className={`text-sm ${textColor} space-y-3`}>
                         <Link href="/locations/canada" className={`block hover:${linkHoverColor} transition`}>Canada</Link>
@@ -116,14 +115,14 @@ const MainFooter = () => {
                         <Link href="/locations/africa" className={`block hover:${linkHoverColor} transition`}>Africa</Link>
                         <Link href="/locations/spain" className={`block hover:${linkHoverColor} transition`}>Spain</Link>
                     </nav>
-                </div>
+                </div> */}
                 
                 {/* Column 4: Newsletter and Social */}
                 <div className="col-span-2 md:col-span-1 lg:col-span-1">
-                    <h4 className="font-semibold text-gray-800 mb-4">Subscribe to our Newsletter!</h4>
+                    {/* <h4 className="font-semibold text-gray-800 mb-4">Subscribe to our Newsletter!</h4> */}
                     
                     {/* Newsletter Input */}
-                    <div className="flex">
+                    {/* <div className="flex">
                         <input
                             type="email"
                             placeholder="Email Address"
@@ -135,7 +134,7 @@ const MainFooter = () => {
                         >
                             <Send className="w-5 h-5" />
                         </button>
-                    </div>
+                    </div> */}
                     
                     <h4 className="font-semibold text-gray-800 mt-6 mb-4">Follow Us on</h4>
                     
@@ -144,8 +143,8 @@ const MainFooter = () => {
                         <a href="https://linkedin.com" aria-label="LinkedIn" className={`${textColor} hover:${linkHoverColor} transition`}>
                             <Linkedin className="w-6 h-6" />
                         </a>
-                        <a href="https://facebook.com" aria-label="Facebook" className={`${textColor} hover:${linkHoverColor} transition`}>
-                            <Facebook className="w-6 h-6" />
+                        <a href="https://twitter.com" aria-label="Twitter" className={`${textColor} hover:${linkHoverColor} transition`}>
+                            <X className="w-6 h-6" />
                         </a>
                         <a href="https://instagram.com" aria-label="Instagram" className={`${textColor} hover:${linkHoverColor} transition`}>
                             <Instagram className="w-6 h-6" />
