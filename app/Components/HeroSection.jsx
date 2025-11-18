@@ -19,7 +19,7 @@ const cityOptions = [
   "Madrid", // Note: Madrid is duplicated, you may want to remove one
 ];
 const propertyTypeOptions = [
-  "Choose Property Type",
+  "Choose Accomodataion Type",
   "Apartment",
   "House",
   "Condo",
@@ -253,7 +253,7 @@ const SearchFilter = () => (
 
       {/* Apartment Type Column */}
       <div className="w-full sm:flex-1">
-        <label className="text-sm font-medium text-gray-700 block mb-1 sm:mb-2">Apartment Type</label>
+        <label className="text-sm font-medium text-gray-700 block mb-1 sm:mb-2">Accomodation Type</label>
         <div className="border border-gray-300 rounded-lg p-2 sm:p-3">
           <select className="w-full bg-white text-gray-600 outline-none text-sm">
             {propertyTypeOptions.map((option, index) => (
