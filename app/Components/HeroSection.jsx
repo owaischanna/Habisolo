@@ -14,7 +14,7 @@ import Hab from '../../public/assets/hab.jpg';
 const cityOptions = [
   "Select Your City",
   "Sevilla",
-  "Madrid",
+  "Malaga",
   "Granada",
   "Madrid", // Note: Madrid is duplicated, you may want to remove one
 ];
