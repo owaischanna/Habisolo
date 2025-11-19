@@ -43,7 +43,7 @@ const BrandLogo = () => (
       <Image
         src={Hab}
         alt="Habisolo Logo"
-        width={260}    // Increase freely
+        width={200}    // Increase freely
         height={50}    // Increase freely
         className="rounded-full object-none  h-[95px]" // Lock height
         priority
