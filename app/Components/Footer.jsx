@@ -1,10 +1,12 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react'; // 1. Added useState
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Send, ArrowRight, X } from 'lucide-react';
+import AuthModal from "./AuthModal"; // 2. Imported AuthModal
 
 // --- Subcomponent: Call to Action Banner (Dark Green Section) ---
-const CallToAction = () => (
+// 3. Accepted onOpenAuth prop here
+const CallToAction = ({ onOpenAuth }) => (
   // Fixed: Changed -mt-20 to mt-16 to ensure separation from the section above it.
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 relative z-20">
     <div className="bg-green-700 rounded-3xl p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between shadow-2xl overflow-hidden relative">
@@ -40,17 +42,17 @@ const CallToAction = () => (
 
       {/* Button */}
       <div className="mt-6 lg:mt-0 flex-shrink-0 z-10">
-        <Link href="#get-started">
-          <button className="bg-white text-green-700 py-3 px-6 rounded-lg font-bold shadow-xl hover:bg-gray-100 transition duration-300 flex items-center space-x-2">
-            <span>Get Started</span>
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </Link>
+        {/* 4. Removed Link, added onClick to trigger onOpenAuth */}
+        <button 
+          onClick={onOpenAuth}
+          className="bg-white text-green-700 py-3 px-6 rounded-lg font-bold shadow-xl hover:bg-gray-100 transition duration-300 flex items-center space-x-2"
+        >
+          <span>Get Started</span>
+          <ArrowRight className="w-5 h-5" />
+        </button>
       </div>
     </div>
   </div>
-
-  
 );
 
 // --- Main Footer Content ---
@@ -95,47 +97,8 @@ const MainFooter = () => {
                     </address>
                 </div>
                 
-                {/* Column 2: Quick Links */}
-                {/* <div>
-                    <h4 className="font-semibold text-gray-800 mb-4">Quick Links</h4>
-                    <nav className={`text-sm ${textColor} space-y-3`}>
-                        <Link href="/" className={`block hover:${linkHoverColor} transition`}>Home</Link>
-                        <Link href="/about" className={`block hover:${linkHoverColor} transition`}>About</Link>
-                       
-                    </nav>
-                </div> */}
-                
-                {/* Column 3: Discovery (Locations) */}
-                {/* <div>
-                    <h4 className="font-semibold text-gray-800 mb-4">Discovery</h4>
-                    <nav className={`text-sm ${textColor} space-y-3`}>
-                        <Link href="/locations/canada" className={`block hover:${linkHoverColor} transition`}>Canada</Link>
-                        <Link href="/locations/usa" className={`block hover:${linkHoverColor} transition`}>United States</Link>
-                        <Link href="/locations/germany" className={`block hover:${linkHoverColor} transition`}>Germany</Link>
-                        <Link href="/locations/africa" className={`block hover:${linkHoverColor} transition`}>Africa</Link>
-                        <Link href="/locations/spain" className={`block hover:${linkHoverColor} transition`}>Spain</Link>
-                    </nav>
-                </div> */}
-                
                 {/* Column 4: Newsletter and Social */}
                 <div className="col-span-2 md:col-span-1 lg:col-span-1">
-                    {/* <h4 className="font-semibold text-gray-800 mb-4">Subscribe to our Newsletter!</h4> */}
-                    
-                    {/* Newsletter Input */}
-                    {/* <div className="flex">
-                        <input
-                            type="email"
-                            placeholder="Email Address"
-                            className="p-3 border border-gray-300 rounded-l-lg focus:ring-green-600 focus:border-green-600 w-full"
-                        />
-                        <button 
-                            className="bg-green-600 p-3 rounded-r-lg text-white hover:bg-green-700 transition duration-300"
-                            aria-label="Subscribe"
-                        >
-                            <Send className="w-5 h-5" />
-                        </button>
-                    </div> */}
-                    
                     <h4 className="font-semibold text-gray-800 mt-6 mb-4">Follow Us on</h4>
                     
                     {/* Social Icons */}
@@ -165,10 +128,17 @@ const MainFooter = () => {
 
 // Main exported component combines CTA and Main Footer
 const Footer = () => {
+  // 5. Initialize state for the AuthModal
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+
   return (
     <footer>
-      <CallToAction />
+      {/* 6. Pass the open handler to CallToAction */}
+      <CallToAction onOpenAuth={() => setIsAuthOpen(true)} />
       <MainFooter />
+      
+      {/* 7. Include the AuthModal component */}
+      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
     </footer>
   );
 };

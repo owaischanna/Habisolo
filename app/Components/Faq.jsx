@@ -45,7 +45,7 @@ const FAQItem = ({ question, answer }) => {
           
           {/* Helpful question section */}
           <div className="mt-6 pt-4 border-t border-green-200">
-            <p className="text-white font-medium mb-3">Was This Content Helpful?</p>
+            <p className="text-white font-medium mb-3">Was this content helpful?</p>
             <div className="flex space-x-3">
               <button className="p-2 bg-green-500 text-white rounded-full hover:bg-green-700 transition-colors duration-200">
                 <ThumbsUp className="w-5 h-5" />
@@ -63,27 +63,27 @@ const FAQItem = ({ question, answer }) => {
 
 // --- Main FAQ Section Component ---
 const FAQSection = () => {
-  // Updated FAQ data according to the image
+  // Updated FAQ data with corrected casing
   const faqs = [
     {
       question: 'What is Habisolo?',
-      answer: 'Habisolo is a trusted housing platform that connects seniors with space rooms to students and young professionals seeking affordable housing.',
+      answer: 'Habisolo is a trusted housing platform that connects seniors with spare rooms to students and young professionals seeking affordable housing.',
     },
     {
-      question: 'Is it Safe?',
-      answer: 'All users are Verified, Payments are Secure, and Reviews are Transparent.',
+      question: 'Is it safe?',
+      answer: 'All users are verified, payments are secure, and reviews are transparent.',
     },
     {
-      question: 'How much does it Cost?',
-      answer: 'Guests pay rent + a Small Service Fee. Hosts Earn Income After a Service Commission.',
+      question: 'How much does it cost?',
+      answer: 'Guests pay rent + a small service fee. Hosts earn income after a service commission.',
     },
     {
-      question: "What if there's Damage?",
-      answer: 'Guests can choose Refundable Deposits or Optional Insurance Protection.',
+      question: "What if there's damage?",
+      answer: 'Guests can choose refundable deposits or optional insurance protection.',
     },
     {
       question: 'Where is Habisolo available?',
-      answer: 'We are Rolling out in Spain\'s Main Student Hubs: Malaga, Granada, Valencia, Madrid, And Barcelona.',
+      answer: 'We are rolling out in Spain\'s main student hubs: Malaga, Granada, Valencia, Madrid, and Barcelona.',
     },
   ];
 
@@ -91,7 +91,7 @@ const FAQSection = () => {
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
-          FREQUENTLY ASKED QUESTIONS (FAQ)
+          Frequently Asked Questions (FAQ)
         </h2>
         
         <div className="space-y-4">
@@ -109,88 +109,3 @@ const FAQSection = () => {
 };
 
 export default FAQSection;
-
-// "use client";
-// import React, { useState } from 'react';
-// import { Plus, Minus } from 'lucide-react';
-
-// // --- Reusable FAQ Item Component (Accordion) ---
-// const FAQItem = ({ question, answer }) => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   return (
-//     <div className="border border-green-200 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
-//       <button
-//         className="flex justify-between items-center w-full p-5 text-left bg-white focus:outline-none"
-//         onClick={() => setIsOpen(!isOpen)}
-//         aria-expanded={isOpen}
-//       >
-//         <span className="text-lg font-medium text-gray-800">{question}</span>
-//         <div className={`p-1 rounded-full text-white transition-colors duration-300 ${isOpen ? 'bg-red-500' : 'bg-green-600'}`}>
-//           {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-//         </div>
-//       </button>
-
-//       <div
-//         className={`grid transition-all duration-500 ease-in-out ${
-//           isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-//         }`}
-//       >
-//         <div className="overflow-hidden">
-//           <p className="p-5 pt-0 text-gray-600 leading-relaxed">
-//             {answer}
-//           </p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// // --- Main FAQ Section Component ---
-// const FAQSection = () => {
-//   // Static data for the FAQ content
-//   const faqs = [
-//     {
-//       question: 'What is Habisolo?',
-//       answer: 'Habisolo is a human-centered housing platform that connects elderly homeowners with international students and young professionals seeking affordable, meaningful accommodation in shared homes.',
-//     },
-//     {
-//       question: 'Is it Safe?',
-//       answer: 'Safety is our top priority. All users (both hosts and guests) go through a thorough ID verification process. We also offer secure payment systems and insurance options for peace of mind.',
-//     },
-//     {
-//       question: 'How much does it Cost?',
-//       answer: 'The cost varies based on location, room size, and duration. For students/professionals, we offer competitive, all-inclusive pricing. For hosts, listing a space is free, and we take a small, transparent service fee upon a successful match.',
-//     },
-//     {
-//       question: "What if there's Damage?",
-//       answer: "We commit to transparent insurance options and a clear protocol for handling damages. This includes a security deposit and a mediation service to ensure fair resolution for both the host and the guest.",
-//     },
-//     {
-//       question: 'Where is Habisolo Available?',
-//       answer: 'Currently, habisolo is primarily focused on connecting communities across major cities in Spain. We are rapidly expanding and plan to launch in other European countries soon!',
-//     },
-//   ];
-
-//   return (
-//     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-//       <div className="max-w-4xl mx-auto">
-//         <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
-//           FREQUENTLY ASKED QUESTIONS (FAQ)
-//         </h2>
-        
-//         <div className="space-y-4">
-//           {faqs.map((faq, index) => (
-//             <FAQItem 
-//               key={index}
-//               question={faq.question}
-//               answer={faq.answer}
-//             />
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default FAQSection;
