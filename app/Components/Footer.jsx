@@ -103,13 +103,11 @@ const MainFooter = () => {
                     
                     {/* Social Icons */}
                     <div className="flex space-x-4">
-                        <a href="https://linkedin.com" aria-label="LinkedIn" className={`${textColor} hover:${linkHoverColor} transition`}>
-                            <Linkedin className="w-6 h-6" />
-                        </a>
-                        <a href="https://twitter.com" aria-label="Twitter" className={`${textColor} hover:${linkHoverColor} transition`}>
+                     
+                        <a href="https://x.com/habi1solo" aria-label="Twitter" className={`${textColor} hover:${linkHoverColor} transition`}>
                             <X className="w-6 h-6" />
                         </a>
-                        <a href="https://instagram.com" aria-label="Instagram" className={`${textColor} hover:${linkHoverColor} transition`}>
+                        <a href="https://www.instagram.com/habi1solo/" aria-label="Instagram" className={`${textColor} hover:${linkHoverColor} transition`}>
                             <Instagram className="w-6 h-6" />
                         </a>
                     </div>
