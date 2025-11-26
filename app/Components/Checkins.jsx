@@ -44,8 +44,8 @@ const PrepStatusBadge = ({ label, isCompleted }) => (
   </span>
 );
 
-// Check In Card Component (Updated for mobile)
-const CheckInCard = ({ application, onStartCheckIn }) => {
+// Check In Card Component
+const CheckInCard = ({ application, onStartCheckIn, onReschedule, onMessage }) => {
   const { applicant, listing, status, leaseLength, preferredMoveIn } = application;
 
   // Placeholder logic for prep status
@@ -104,10 +104,23 @@ const CheckInCard = ({ application, onStartCheckIn }) => {
           <p className="text-xs md:text-sm text-gray-500">{leaseLength}</p>
         </div>
         <div className="flex flex-col space-y-2 w-full mt-2 md:mt-4">
-          <button className="text-xs md:text-sm font-medium text-gray-700 border border-gray-300 px-2 md:px-3 py-1.5 md:py-2 rounded-lg hover:bg-gray-50 transition">Message Tenant</button>
-          <button className="text-xs md:text-sm font-medium text-orange-600 border border-orange-300 px-2 md:px-3 py-1.5 md:py-2 rounded-lg hover:bg-orange-50 flex items-center justify-center transition">
+          
+          {/* Message Tenant Button */}
+          <button 
+            onClick={() => onMessage(application)}
+            className="text-xs md:text-sm font-medium text-gray-700 border border-gray-300 px-2 md:px-3 py-1.5 md:py-2 rounded-lg hover:bg-gray-50 transition"
+          >
+            Message Tenant
+          </button>
+          
+          {/* Reschedule Button: Triggers redirection */}
+          <button 
+            onClick={() => onReschedule(application)}
+            className="text-xs md:text-sm font-medium text-orange-600 border border-orange-300 px-2 md:px-3 py-1.5 md:py-2 rounded-lg hover:bg-orange-50 flex items-center justify-center transition"
+          >
             <Edit className="w-3 h-3 md:w-4 md:h-4 mr-1" /> Reschedule
           </button>
+
           <button
             onClick={() => onStartCheckIn(application)}
             className="text-xs md:text-sm font-medium text-white bg-green-600 px-2 md:px-3 py-1.5 md:py-2 rounded-lg hover:bg-green-700 flex items-center justify-center transition"
@@ -181,6 +194,17 @@ const CheckInsContent = () => {
   const handleStartCheckIn = (application) => {
     setSelectedApplication(application);
     setCurrentStep(2); // Start with Property Tour
+  };
+
+  // Navigation handler for Rescheduling
+  const handleReschedule = (application) => {
+    // Redirect to the host rescheduling page with the application ID
+    router.push(`/hostreschedule?id=${application._id}`);
+  };
+
+  // Navigation handler for Messaging
+  const handleMessageTenant = (application) => {
+    router.push('/hostmessages');
   };
 
   const handleStepComplete = () => {
@@ -278,6 +302,8 @@ const CheckInsContent = () => {
                     key={app._id}
                     application={app}
                     onStartCheckIn={handleStartCheckIn}
+                    onReschedule={handleReschedule} 
+                    onMessage={handleMessageTenant}
                   />
                 ))}
 
