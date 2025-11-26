@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingUp, DollarSign,EuroIcon, Calendar, AlertCircle, Download, MoreHorizontal } from "lucide-react";
+import { TrendingUp, DollarSign, EuroIcon, Calendar, AlertCircle, Download, MoreHorizontal } from "lucide-react";
 import HostHeader from "./HostHeader";
 import HostSidebar from "./HostSidebar";
 
@@ -117,7 +117,8 @@ const HostEarnings = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
       <HostSidebar />
 
@@ -127,7 +128,8 @@ const HostEarnings = () => {
         <HostHeader />
 
         {/* Earnings Dashboard */}
-        <main className="flex-1 p-8">
+        {/* FIX: Added overflow-y-auto to allow internal scrolling */}
+        <main className="flex-1 p-8 overflow-y-auto">
           {/* Header Section */}
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-gray-900">Payments & Earnings</h1>

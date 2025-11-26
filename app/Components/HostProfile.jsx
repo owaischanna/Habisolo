@@ -140,7 +140,7 @@ export default function HostProfile() {
 
   if (isLoading || !profileData || !stats) {
     return (
-      <div className="flex min-h-screen bg-gray-50">
+      <div className="flex h-screen bg-gray-50 overflow-hidden">
         <HostSidebar />
         <div className="flex-1 flex flex-col">
           <HostHeader />
@@ -159,11 +159,13 @@ export default function HostProfile() {
   } = profileData;
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       <HostSidebar />
       <div className="flex-1 flex flex-col">
         <HostHeader />
-        <main className="p-6 overflow-y-auto">
+        {/* FIX: Added flex-1 to ensure this main section handles the scrolling */}
+        <main className="flex-1 p-6 overflow-y-auto">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">Profile</h1>
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="lg:w-1/3 space-y-6">

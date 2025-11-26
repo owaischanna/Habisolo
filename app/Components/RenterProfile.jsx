@@ -463,10 +463,12 @@ const RenterProfile = () => {
 
   if (authLoading || isLoading || !profileData || !stats) {
     return (
-      <div className="flex min-h-screen bg-gray-50">
+      // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+      <div className="flex h-screen bg-gray-50 overflow-hidden">
         <Sidebar />
         <div className="flex-1 flex flex-col">
           <RenterHeader />
+          {/* FIX: Use main wrapper with proper flex settings */}
           <main className="flex-1 flex items-center justify-center">
             <Loader2 className="w-8 h-8 animate-spin text-green-600" />
           </main>
@@ -476,11 +478,13 @@ const RenterProfile = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       <Sidebar />
-      <div className="flex-1 flex flex-col overflow-y-auto">
+      <div className="flex-1 flex flex-col">
         <RenterHeader />
-        <div className="flex-1 p-6">
+        {/* FIX: Wrapped content in main with overflow-y-auto to allow independent scrolling */}
+        <main className="flex-1 overflow-y-auto p-6">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-6">
               <div className="w-full lg:w-1/4 space-y-6">
@@ -537,7 +541,7 @@ const RenterProfile = () => {
               </div>
             </div>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import React from "react";
 import { Download, MapPin, Clock, Phone, CheckCircle } from "lucide-react";
 import HostSidebar from "./HostSidebar";
 import HstHeader from "./HostHeader";
+
 // --- Utility Components ---
 const StatusBadge = ({ status }) => {
   let colorClass = "bg-gray-100 text-gray-700";
@@ -196,7 +197,8 @@ const MyBookingsContent = () => {
   ];
 
   return (
-    <div className="flex">
+    // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
       <HostSidebar />
 
@@ -206,7 +208,8 @@ const MyBookingsContent = () => {
         <HstHeader />
 
         {/* Page Content */}
-        <div className="p-4 md:p-6 lg:p-8">
+        {/* FIX: Added overflow-y-auto to allow content to scroll independently */}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 md:mb-8 gap-4">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">My Bookings</h1>
             <button className="flex items-center justify-center space-x-2 text-sm font-semibold text-gray-700 border border-gray-300 px-4 py-2 rounded shadow-sm hover:bg-gray-50 transition w-full sm:w-auto">
@@ -245,7 +248,7 @@ const MyBookingsContent = () => {
               <BookingCard key={booking.id} booking={booking} />
             ))}
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

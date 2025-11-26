@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import RenterHeader from './RenterHeader';
 import RenterSidebar from './RenterSidebar';
-import { Bell, Search, ChevronDown, Trash2, CheckCircle, Clock, DollarSign, AlertTriangle, Home, X, TrendingUp, TrendingDown, RefreshCw } from 'lucide-react';
+import { Bell, Search, ChevronDown, Trash2, CheckCircle, DollarSign, AlertTriangle, TrendingUp, X, RefreshCw } from 'lucide-react';
 
 // --- Dummy Data Structure ---
 const initialGuestNotifications = [
@@ -152,14 +152,16 @@ const GuestNotificationsPage = () => {
     const orderedGroups = ['Today', ...Object.keys(groupedNotifications).filter(g => g !== 'Today')];
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
+        // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+        <div className="flex h-screen bg-gray-50 overflow-hidden">
             
             <RenterSidebar />
 
             <div className="flex-1 flex flex-col min-w-0">
                 <RenterHeader />
                 
-                <main className="flex-1 p-3 sm:p-4 md:p-6 lg:p-8">
+                {/* FIX: Added overflow-y-auto to allow content to scroll independently */}
+                <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 lg:p-8">
                     
                     {/* Header */}
                     <div className="max-w-7xl mx-auto w-full">

@@ -228,7 +228,8 @@ const CheckInProcess = ({ booking, onBack }) => {
     return (
         <div className="flex flex-col md:flex-row bg-gray-50 min-h-full">
             <CheckInStepper booking={booking} currentStep={stepNumber[step]} />
-            <div className="flex-1 p-4 md:p-6 lg:p-8 overflow-y-auto">
+            {/* FIX: Removed overflow-y-auto to allow parent main to handle scroll */}
+            <div className="flex-1 p-4 md:p-6 lg:p-8">
                  {renderRightColumn()}
             </div>
         </div>
@@ -266,7 +267,8 @@ const MyBookingsContent = ({ onStartCheckIn }) => {
     const summary = bookingsData.summary;
     const StatBox = ({ value, label }) => (<div className="p-3 md:p-4 bg-white rounded-xl shadow-sm border border-gray-200 min-w-[120px] md:min-w-[150px]"><p className="text-2xl md:text-3xl font-bold text-gray-900">{value}</p><p className="text-xs md:text-sm text-gray-500">{label}</p></div>);
     return (
-        <div className="flex-1 p-4 md:p-6 lg:p-8 bg-gray-50 overflow-y-auto">
+        // FIX: Removed flex-1 and overflow-y-auto to allow parent main to handle scroll
+        <div className="p-4 md:p-6 lg:p-8 bg-gray-50">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 md:mb-8 gap-4"><div><h1 className="text-xl md:text-2xl font-bold text-gray-900">My Bookings</h1><p className="text-gray-600 text-sm md:text-base">Manage your confirmed bookings and upcoming stays</p></div><button className="flex items-center justify-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition shadow-sm w-full sm:w-auto"><Download className="w-4 h-4 md:w-5 md:h-5" /><span>Export</span></button></div>
             <div className="flex flex-wrap gap-4 md:gap-6 mb-8 md:mb-10"><StatBox value={summary.active} label="Active Bookings" /><StatBox value={summary.checkIns} label="Check-ins" /><StatBox value={summary.checkOuts} label="Check-outs" /><StatBox value={summary.totalSpent} label="Total Spent" /></div>
             <div>
@@ -292,10 +294,12 @@ const MyBookingsPage = () => {
     };
 
     return (
-        <div className="flex min-h-screen">
+        // FIX: Changed min-h-screen to h-screen and added overflow-hidden
+        <div className="flex h-screen bg-gray-50 overflow-hidden">
             <Sidebar />
-            <div className="flex-1 flex flex-col overflow-hidden bg-gray-50">
+            <div className="flex-1 flex flex-col min-w-0">
                 <RenterHeader />
+                {/* FIX: Added overflow-y-auto here so only this main section scrolls */}
                 <main className="flex-1 overflow-y-auto">
                     {view === 'list' && <MyBookingsContent onStartCheckIn={handleStartCheckIn} />}
                     {view === 'checkin' && selectedBooking && <CheckInProcess booking={selectedBooking} onBack={handleBackToList} />}

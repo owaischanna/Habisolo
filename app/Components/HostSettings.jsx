@@ -26,11 +26,16 @@ export default function SettingsComponent() {
   });
 
   return (
-    <div className="flex bg-gray-50 min-h-screen">
+    // CHANGE 1: Changed 'min-h-screen' to 'h-screen' and added 'overflow-hidden'
+    <div className="flex bg-gray-50 h-screen overflow-hidden">
+      
+      {/* The Sidebar will now stretch to full height and stay fixed */}
       <HostSidebar />
+
       <div className="flex-1 flex flex-col">
         <HostHeader />
 
+        {/* This main section handles the scrolling internally */}
         <main className="flex-1 overflow-y-auto p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-2">Settings</h1>
           <p className="text-gray-500 mb-6">
@@ -245,7 +250,7 @@ export default function SettingsComponent() {
 }
 
 /* --- Reusable Sub Components --- */
-
+// (Keep these exactly the same as your original code)
 const SettingItem = ({ title, description, toggle, setToggle, action, status }) => (
   <div className="flex justify-between items-center border-b last:border-0 pb-3">
     <div>
