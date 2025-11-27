@@ -204,7 +204,7 @@ const CheckInsContent = () => {
 
   // Navigation handler for Messaging
   const handleMessageTenant = (application) => {
-    router.push('/hostmessages');
+    router.push('/hostmessage');
   };
 
   const handleStepComplete = () => {
