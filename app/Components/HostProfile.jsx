@@ -259,7 +259,7 @@ export default function HostProfile() {
                     <div className="flex flex-wrap gap-4">{["Students", "Young Professionals", "Business Travelers", "Families", "Couples"].map((type) => (<label key={type} className="flex items-center"><input type="checkbox" checked={editableData.hostingPreferences.guestTypes?.includes(type)} onChange={() => handleCheckboxChange('hostingPreferences', 'guestTypes', type)} disabled={!isEditing} className="rounded border-gray-300 text-green-600 focus:ring-green-500 disabled:bg-gray-200" /><span className="ml-2 text-sm text-gray-700">{type}</span></label>))}</div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Preferred Stay Duration</h3>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4"> Stay Duration</h3>
                     <div className="space-y-3">{[{ label: "Short-term (1-3 months)", key: "short" }, { label: "Medium-term (3-12 months)", key: "medium" }, { label: "Long-term (12+ months)", key: "long" }].map((item) => (<label key={item.key} className="flex items-center"><input type="checkbox" checked={editableData.hostingPreferences.stayDuration?.includes(item.key)} onChange={() => handleCheckboxChange('hostingPreferences', 'stayDuration', item.key)} disabled={!isEditing} className="rounded border-gray-300 text-green-600 focus:ring-green-500 disabled:bg-gray-200" /><span className="ml-2 text-sm text-gray-700">{item.label}</span></label>))}</div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
